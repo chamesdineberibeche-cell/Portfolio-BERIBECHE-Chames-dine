@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio – Chames‑Dine Beribeche</title>
+
+    <style>
+        :root {
+            --bg: #050509;
+            --bg-alt: #0b0f16;
+            --card: #101322;
+            --accent: #00eaff;
+            --accent-soft: #00eaff33;
+            --text: #e6e6e6;
+            --muted: #9a9a9a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at top, #151b35 0, #050509 45%, #020308 100%);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 20;
+            backdrop-filter: blur(12px);
+            background: linear-gradient(to right, #050509ee, #050509cc);
+            border-bottom: 1px solid #15182a;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            margin-left: 18px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* HERO */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 60px;
+            position: relative;
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            color: var(--accent);
+            text-shadow: 0 0 18px var(--accent-soft);
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--accent-soft);
+            background: #050509aa;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .hero-badge span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent);
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #020308;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 18px var(--accent-soft);
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--accent);
+            border-color: #2a3048;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            background: #0b0f1f;
+        }
+
+        .hero-right {
+            position: relative;
+            padding: 20px;
+        }
+
+        .hero-card {
+            background: radial-gradient(circle at top left, #1b2340, #0b0f1f);
+            border-radius: 18px;
+            padding: 20px;
+            border: 1px solid #262b45;
+            box-shadow: 0 0 30px #000000aa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: conic-gradient(from 120deg, var(--accent-soft), transparent, transparent, var(--accent-soft));
+            opacity: 0.25;
+            mix-blend-mode: screen;
+            animation: rotate 14s linear infinite;
+        }
+
+        .hero-card-inner { position: relative; z-index: 1; }
+
+        .hero-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .hero-role {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-meta {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .hero-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .chip {
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid #2b3250;
+            font-size: 0.75rem;
+            color: var(--muted);
+            background: #050509aa;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--muted);
+            opacity: 0.7;
+            animation: bounce 1.6s infinite;
+        }
+
+        /* SECTIONS */
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            width: 26px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 999px;
+        }
+
+        .section p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* GRID / CARDS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #0b0f1a, #050509);
+            border-radius: 14px;
+            padding: 18px 18px 20px;
+            border: 1px solid #1b2036;
+            position: relative;
+            overflow: hidden;
+            transition: 0.25s;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(circle at top, var(--accent-soft), transparent 55%);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .card:hover::before { opacity: 0.35; }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-soft);
+            box-shadow: 0 0 22px #000000aa;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .card p { font-size: 0.9rem; }
+
+        .card small {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .pill {
+            padding: 3px 9px;
+            border-radius: 999px;
+            border: 1px solid #262b45;
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        /* CONTACT */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+            gap: 30px;
+        }
+
+        .contact-card {
+            background: #050509;
+            border-radius: 14px;
+            border: 1px solid #1b2036;
+            padding: 18px 18px 20px;
+        }
+
+        .contact-item {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .contact-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid #15182a;
+            padding: 25px 20px 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 40px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: 1fr; }
+            .hero-right { order: -1; }
+            .hero-title { font-size: 2.4rem; }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            header { padding-top: 110px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <div class="nav-brand">CHAMES‑DINE BERIBECHE</div>
+        <div class="nav-links">
+            <a href="#about">À propos</a>
+            <a href="#skills">Compétences</a>
+            <a href="#project">Projet</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<header>
+    <div class="hero-inner">
+        <div>
+            <div class="hero-badge">
+                <span></span> Alternance • Support IT & VDI
+            </div>
+            <h1 class="hero-title">Support informatique<br>orienté systèmes & VDI.</h1>
+            <p class="hero-sub">
+                Alternant en support informatique à la Mairie de Drancy depuis 2 ans, je travaille au quotidien
+                sur un environnement professionnel : gestion d’incidents, supervision d’un parc VDI VMware Horizon,
+                administration Active Directory et gestion de postes clients légers.
+            </p>
+            <div class="hero-buttons">
+                <a href="#project" class="btn-primary">Voir mon projet</a>
+                <a href="#contact" class="btn-ghost">Me contacter</a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="hero-card">
+                <div class="hero-card-inner">
+                    <div class="hero-tag">Expérience actuelle</div>
+                    <div class="hero-role">Alternant Support IT – Mairie de Drancy</div>
+                    <div class="hero-meta">
+                        Gestion des tickets, assistance utilisateurs, supervision VDI, administration de comptes
+                        dans Active Directory, déploiement et maintenance de clients légers Dell, et respect des
+                        bonnes pratiques de sécurité.
+                    </div>
+                    <div class="hero-chip-row">
+                        <div class="chip">GLPI</div>
+                        <div class="chip">VMware Horizon 7</div>
+                        <div class="chip">Active Directory</div>
+                        <div class="chip">Dell WMS</div>
+                        <div class="chip">Windows</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">▼ Scroll pour découvrir le portfolio</div>
+</header>
+
+<section id="about" class="section">
+    <h2 class="section-title"><span></span>À propos de moi</h2>
+    <p>
+        Passionné par l'informatique, je me forme aux métiers des systèmes, réseaux et de la sécurité informatique.
+        Pendant mon alternance en support IT à la Mairie de Drancy, j’ai travaillé sur un environnement réel avec
+        des utilisateurs, des incidents et une infrastructure virtualisée basée sur VMware Horizon.
+        <br><br>
+        J’ai développé un vrai sens du service, de la rigueur et une bonne compréhension du fonctionnement d’un
+        système d’information en production. À terme, je souhaite évoluer vers des postes plus orientés systèmes,
+        réseaux et, progressivement, cybersécurité.
+    </p>
+</section>
+
+<section id="skills" class="section">
+    <h2 class="section-title"><span></span>Compétences</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>🧰 Support informatique</h3>
+            <p>
+                • Gestion des incidents et demandes via GLPI<br>
+                • Diagnostic et résolution de problèmes utilisateurs (Windows, réseau, bureautique)<br>
+                • Accompagnement et formation rapide des utilisateurs<br>
+                • Suivi et documentation des interventions
+            </p>
+            <div class="pill-row">
+                <div class="pill">GLPI</div>
+                <div class="pill">Support utilisateurs</div>
+                <div class="pill">Bureautique</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🖥️ Systèmes & VDI</h3>
+            <p>
+                • Supervision d’un parc VDI sous VMware Horizon 7<br>
+                • Gestion des pools de machines virtuelles<br>
+                • Diagnostic de sessions et analyse de logs<br>
+                • Redémarrage / fermeture de VM bloquées
+            </p>
+            <div class="pill-row">
+                <div class="pill">VMware Horizon 7</div>
+                <div class="pill">VDI</div>
+                <div class="pill">Logs</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🔒 Administration & parc</h3>
+            <p>
+                • Gestion des comptes utilisateurs et groupes dans Active Directory<br>
+                • Application de stratégies de sécurité (GPO, droits d’accès)<br>
+                • Déploiement et maintenance de clients légers Dell (ThinOS) via WMS<br>
+                • Supervision du parc (mises à jour, correctifs, inventaire)
+            </p>
+            <div class="pill-row">
+                <div class="pill">Active Directory</div>
+                <div class="pill">GPO</div>
+                <div class="pill">Dell WMS</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="project" class="section">
+    <h2 class="section-title"><span></span>Projet professionnel</h2>
+    <div class="card">
+        <small>Projet réel – Mairie de Drancy</small>
+        <h3>🖧 Supervision d’un parc VDI VMware Horizon</h3>
+        <p>
+            Dans le cadre de mon alternance, j’ai participé à la supervision et à l’exploitation d’un parc de postes
+            virtuels sous VMware Horizon 7 utilisé par les agents de la mairie.
+            <br><br>
+            <strong>Responsabilités principales :</strong><br>
+            • Gestion des pools de machines virtuelles (création, suivi, affectation)<br>
+            • Diagnostic des sessions utilisateurs (déconnexions, lenteurs, blocages)<br>
+            • Analyse et interprétation des logs pour identifier l’origine des incidents<br>
+            • Redémarrage et fermeture de VM bloquées ou en erreur<br>
+            • Suivi des incidents en lien avec le support et la DSI<br>
+            • Contribution à l’optimisation de la disponibilité et des performances du parc VDI
+            <br><br>
+            Ce projet m’a permis de comprendre concrètement le fonctionnement d’une infrastructure VDI en production,
+            les enjeux de disponibilité pour les utilisateurs et l’importance de la supervision et de la réactivité
+            dans un environnement de travail réel.
+        </p>
+        <div class="pill-row">
+            <div class="pill">VMware Horizon 7</div>
+            <div class="pill">VDI</div>
+            <div class="pill">Supervision</div>
+            <div class="pill">Diagnostic</div>
+            <div class="pill">Production</div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section">
+    <h2 class="section-title"><span></span>Contact</h2>
+    <div class="contact-grid">
+        <div>
+            <p>
+                Vous souhaitez en savoir plus sur mon expérience en support informatique, VDI ou administration
+                de parc ? Je suis ouvert aux opportunités d’alternance, de premier poste ou de collaboration
+                dans l’informatique (systèmes, réseaux, exploitation, futur cybersécurité).
+            </p>
+        </div>
+        <div class="contact-card">
+            <div class="contact-item">
+                <div class="contact-label">Email</div>
+                <a href="mailto:chamesdine.beribeche@gmail.com">chamesdine.beribeche@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <div class="contact-label">Téléphone</div>
+                <span>06 02 29 12 02</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-label">Localisation</div>
+                <span>Drancy (93700), France</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+   Portfolio de Chames‑Dine Beribeche • Support informatique, VDI & systèmes
+</footer>
+
+</body>
+</html>
